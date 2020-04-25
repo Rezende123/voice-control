@@ -10,13 +10,11 @@ sys.path.append(path + '/lib/')
 import command
 import comunication
 
-def clear():
-    os.system('cls' if os.name=='nt' else 'clear')
+botName = 'Nala'
 
 word = comunication.listen_microfone()
 
-if (re.search('olá nala', word, re.IGNORECASE)):
+if (re.search('olá ' + botName, word, re.IGNORECASE)):
     comunication.speak_word('Oi, estou aqui para ajudar, basta pedir')
-    print("Pode pedir:")
-    request = comunication.listen_microfone()
+    request = comunication.listen_microfone('Pode pedir Felipe')
     command.search_command(request)
