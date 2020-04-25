@@ -1,6 +1,18 @@
 ﻿# -*- coding: utf-8 -*-
 
 import speech_recognition as sr
+from gtts import gTTS
+from playsound import playsound
+
+#Funcao responsavel por falar 
+def cria_audio(audio):
+    tts = gTTS(audio,lang='pt-br')
+    #Salva o arquivo de audio
+    tts.save('assets/speak.mp3')
+    print("Estou aprendendo o que você disse...")
+    #Da play ao audio
+    playsound('assets/speak.mp3')
+
 #Funcao responsavel por ouvir e reconhecer a fala
 def ouvir_microfone():
     #Habilita o microfone para ouvir o usuario
@@ -25,4 +37,5 @@ def ouvir_microfone():
 
     return frase
 
-ouvir_microfone()
+frase = ouvir_microfone()
+cria_audio(frase)
