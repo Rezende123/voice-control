@@ -17,6 +17,6 @@ def similar(a, b):
 
 def search_command(request):
     for cmd in commands:
-        if (fuzz.partial_ratio(cmd.key, request) > 80):
+        if (fuzz.partial_ratio(cmd.key, request) >= 80):
             os.system(cmd.content)
             return
