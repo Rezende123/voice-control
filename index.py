@@ -13,44 +13,44 @@ import command as commandModule
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
 
-def searchCommand(request):
+def search_command(request):
     for cmd in commandModule.commands:
         if (re.search(cmd.key, request, re.IGNORECASE)):
             os.system(cmd.content)
 
-def cria_audio(audio):
-    tts = gTTS(audio,lang='pt-br')
+def speak_word(word):
+    tts = gTTS(word,lang='pt-br')
 
     tts.save('assets/speak.mp3')
 
     playsound('assets/speak.mp3')
 
-def ouvir_microfone():
+def listen_microfone(listenMessage = "Pode falar"):
     microfone = sr.Recognizer()
 
     with sr.Microphone() as source:
         microfone.adjust_for_ambient_noise(source)
         
-        clear()
-        print("Pode falar")
+        # clear()
+        print(listenMessage)
         
         audio = microfone.listen(source)
     try:
         
-        frase = microfone.recognize_google(audio, language='pt-BR')
-        frase = frase.encode('utf8')
+        word = microfone.recognize_google(audio, language='pt-BR')
+        word = word.encode('utf8')
         
-        print("Você disse: " + frase)
+        print("Você disse: " + word)
         
     except LookupError:
         print("Não entendi")
 
-    return frase
+    return word
 
-frase = ouvir_microfone()
+word = listen_microfone()
 
-if (re.search('olá nala', frase, re.IGNORECASE)):
-    cria_audio('Oi, estou aqui para ajudar, basta pedir')
+if (re.search('olá nala', word, re.IGNORECASE)):
+    speak_word('Oi, estou aqui para ajudar, basta pedir')
     print("Pode pedir:")
-    pedido = ouvir_microfone()
-    searchCommand(pedido)
+    pedido = listen_microfone()
+    search_command(pedido)
