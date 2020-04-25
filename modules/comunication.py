@@ -4,9 +4,21 @@ import os
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
+import time
+import sys
 
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
+
+def animation_load():
+    animation = "|/-\\"
+
+    for i in range(100):
+        time.sleep(0.1)
+        sys.stdout.write("Ouvindo...\r" + animation[i % len(animation)])
+        sys.stdout.flush()
+    
+    print ""
 
 def speak_word(word):
     tts = gTTS(word,lang='pt-br')
@@ -23,6 +35,7 @@ def listen_microfone(listenMessage = "Pode falar"):
         
         clear()
         print(listenMessage)
+        animation_load()
         
         audio = microfone.listen(source)
     try:
