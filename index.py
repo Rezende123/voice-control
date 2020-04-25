@@ -1,12 +1,22 @@
 ﻿# -*- coding: utf-8 -*-
 
 import os
+import re
+import sys
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
+sys.path.append('/home/felipe/Workspace/git/voice-control/models/')
+
+import command as commandModule
 
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
+
+def searchCommand(request):
+    for cmd in commandModule.commands:
+        if (re.search(cmd.key, request, re.IGNORECASE)):
+            os.system(cmd.content)
 
 def cria_audio(audio):
     tts = gTTS(audio,lang='pt-br')
@@ -39,6 +49,8 @@ def ouvir_microfone():
 
 frase = ouvir_microfone()
 
-if (frase == 'Olá Nala'):
+if (re.search('olá nala', frase, re.IGNORECASE)):
     cria_audio('Oi, estou aqui para ajudar, basta pedir')
-    print("Pode pedir")
+    print("Pode pedir:")
+    pedido = ouvir_microfone()
+    searchCommand(pedido)
