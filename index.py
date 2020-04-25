@@ -5,7 +5,7 @@ import re
 import sys
 
 path = os.getcwd()
-sys.path.append(path + '/lib/')
+sys.path.append(path + '/modules/')
 
 import command
 import comunication
