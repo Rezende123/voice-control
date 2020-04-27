@@ -1,6 +1,5 @@
 import re
 import os
-from difflib import SequenceMatcher
 from fuzzywuzzy import fuzz
 import webbrowser
 
