@@ -44,7 +44,8 @@ def listen_microfone(listenMessage = "Pode falar"):
                 
         print("Você disse: " + word)
         
-    except sr.UnkownValueError:
+    except:
         print("Não entendi")
+        return ""
 
     return word

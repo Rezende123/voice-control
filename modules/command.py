@@ -2,6 +2,7 @@ import re
 import os
 from fuzzywuzzy import fuzz
 import webbrowser
+from whatsapp_messages import mandar_mensagem_whatsapp
 
 class command: 
     def __init__(self, key, content):  
@@ -39,6 +40,10 @@ def searchInNavigator(request):
     url = "https://www.google.com.tr/search?q={}".format(params)
     webbrowser.open_new_tab(url)
 
+def enviar_mensagem(request):
+    mensagem = request.split("mensagem")[1]
+    mandar_mensagem_whatsapp(mensagem)
+
 def search_command(request):
     for cmd in commands:
         if (
@@ -46,6 +51,9 @@ def search_command(request):
             re.search('procurar', request, re.IGNORECASE)            
             ):
             searchInNavigator(request)
+            return
+        elif (re.search('mensagem', request, re.IGNORECASE)):
+            enviar_mensagem(request)
             return
         elif (fuzz.partial_ratio(cmd.key, request) >= 80):
             os.system(cmd.content)
