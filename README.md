@@ -6,7 +6,7 @@ Um controle de voz em python, que vai servir para executar comandos no computado
 
 Para executar basta ir até o diretório do projeto e rodar o comando:
 ```
-python index.py
+python .
 ```
 
 ## BIBLIOTECAS

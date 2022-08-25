@@ -18,7 +18,7 @@ def animation_load():
         sys.stdout.write("Ouvindo...\r" + animation[i % len(animation)])
         sys.stdout.flush()
     
-    print ""
+    print("")
 
 def speak_word(word):
     tts = gTTS(word,lang='pt-br')
@@ -41,11 +41,10 @@ def listen_microfone(listenMessage = "Pode falar"):
     try:
         
         word = microfone.recognize_google(audio, language='pt-BR')
-        word = word.encode('utf8')
-        
+                
         print("Você disse: " + word)
         
-    except LookupError:
+    except sr.UnkownValueError:
         print("Não entendi")
 
     return word

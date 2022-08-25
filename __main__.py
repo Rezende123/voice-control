@@ -7,14 +7,15 @@ import sys
 path = os.getcwd()
 sys.path.append(path + '/modules/')
 
-import command
-import comunication
+import modules.command as command
+import modules.comunication as comunication
 
-botName = 'Nala'
+bootCommand = 'Botas'
+botName = 'Botas'
 
 word = comunication.listen_microfone()
 
-if (re.search('olá ' + botName, word, re.IGNORECASE)):
-    comunication.speak_word('Oi, estou aqui para ajudar, basta pedir')
+if (re.search(botName, word, re.IGNORECASE)):
+    comunication.speak_word('Oi, meu nome é Botas, estou aqui para ajudar, basta pedir')
     request = comunication.listen_microfone('Pode pedir Felipe')
     command.search_command(request)
